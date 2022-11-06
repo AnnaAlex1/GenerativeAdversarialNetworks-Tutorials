@@ -4,7 +4,12 @@ https://www.youtube.com/watch?v=OljTVUVzPpM&list=PLhhyoLH6IjfwIp8bZnzX8QR30TRcHO
 
 
 ### Environment
-1. List of environments:
+
+Anaconda Environments:
+https://edcarp.github.io/introduction-to-conda-for-data-scientists/02-working-with-environments/index.html
+
+
+1. List environments:
 ```bash
     conda info --envs
 ```
@@ -13,15 +18,25 @@ or
     conda env list
 ```
 
-2. Activate:
+2. Create a new environment for Python development:
+```
+$ conda create --name python3-env python
+```
+
+3. Activate:
 ```bash
     conda activate myenv
 ```
 
-3. Deactivate:
+4. Deactivate:
 ```bash
     conda deactivate
 ```
+
+
+For this project:
+- Use of Anaconda prompt
+- conda activate pytorchenv
 
 ## Theory
 
