@@ -4,12 +4,12 @@ import torch.nn as nn
 class ConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels, down=True, use_act=True, **kwargs ):  # down=true for down sampling
         super().__init__()
-        self.conv == nn.Sequential(
+        self.conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels, padding_mode="reflect", **kwargs)
             if down
             else nn.ConvTranspose2d(in_channels, out_channels, **kwargs),
             nn.InstanceNorm2d(out_channels),
-            nn.ReLU(inplace=True) if use_act else nn.Identity()         # nn.Identity() -> forwards the input given to it (basically no-op)
+            nn.ReLU(inplace=True) if use_act else nn.Identity()
         )
 
     def forward(self, x):
@@ -41,7 +41,7 @@ class Generator(nn.Module):
             ]
         )
 
-        self.residual_blocks = nn.Sequential(
+        self.res_blocks = nn.Sequential(
             *[ResidualBlock(num_features*4) for _ in range(num_residuals)]
 
         )
@@ -59,9 +59,9 @@ class Generator(nn.Module):
         x = self.initial(x)
         for layer in self.down_blocks:
             x = layer(x)
-        x = self.residual_blocks(x)
+        x = self.res_blocks(x)
         for layer in self.up_blocks:
             x = layer(x)
-        return torch.tahn(self.last(x))
+        return torch.tanh(self.last(x))
 
         
